@@ -68,6 +68,21 @@ sequenceDiagram
 6. **Verified settlement.** A payment counts as `confirmed` only when the receipt succeeded *and* the USDC
    contract itself emitted `AuthorizationUsed(payer, nonce)` and `Transfer(payer, merchant, amount)`.
 
+## What the customer sees
+
+<p align="center">
+  <img src="docs/images/metamask-signature-request.jpg" alt="MetaMask mobile showing a signature request for a 0.01 USDC checkout on Sepolia, primary type TransferWithAuthorization, with a Review alert button" width="320">
+</p>
+
+The first real payment, on an iPhone in MetaMask's in-app browser. The checkout page asks for **0.01 USDC**,
+and MetaMask shows an EIP-712 signature request on **Sepolia**:
+- **Interacting with** is Circle's USDC contract (`0x1c7D…7238`).
+- **Primary type** is `TransferWithAuthorization`.
+- There is no transaction and no gas fee: the customer only signs. Our relayer submitted it, and it settled
+  in [this transaction](https://sepolia.etherscan.io/tx/0xd4bab3d63a3dc2c1822ab0c76e74f545588b405c6276ef64ee1c3094030965ba).
+
+Note the red **Review alert** button. That is the UX problem described below.
+
 ## Design decisions I found interesting
 
 - **A signature can't cross chains.** The EIP-712 domain commits to `chainId` and the token contract. A
@@ -83,7 +98,7 @@ sequenceDiagram
 - **Crash-safe reconciler.** Every step is re-derived from the database and the chain, so the reconciler
   recovers from restarts, dropped transactions and front-running (someone else submitting the signature
   first). A checkout nobody authorized is searched for on **every** chain before it may expire.
-- **Honest UX finding.** MetaMask flags `TransferWithAuthorization` signatures as **high risk**, because
+- **Honest UX finding** (see the screenshot above). MetaMask flags `TransferWithAuthorization` signatures as **high risk**, because
   wallet-drainer phishing uses the same signature type. A real customer sees "deny this" at the moment of
   paying. That pushes towards signing cards or wallet-native payment flows for in-store use.
 
