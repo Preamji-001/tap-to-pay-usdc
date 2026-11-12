@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="neutral">#FFE8EAED</color>
+    <color name="waiting">#FF8AB4F8</color>
+    <color name="success">#FF4ADE80</color>
+    <color name="failure">#FFF97066</color>
+</resources>

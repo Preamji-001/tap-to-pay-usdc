@@ -1,0 +1,95 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #16181d;
+  --muted: #5d6470;
+  --border: #e3e5e9;
+  --accent: #2563eb;
+  --accent-text: #ffffff;
+  --success: #15803d;
+  --success-bg: #ecfdf3;
+  --error: #b42318;
+  --error-bg: #fef3f2;
+  --info-bg: #eff4ff;
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --card: #181b21;
+    --text: #e8eaed;
+    --muted: #9aa1ad;
+    --border: #2a2e36;
+    --accent: #4f8cff;
+    --success: #4ade80;
+    --success-bg: #0f2a1a;
+    --error: #f97066;
+    --error-bg: #2d1414;
+    --info-bg: #15203a;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.footnote { max-width: 420px; color: var(--muted); font-size: 0.85rem; text-align: center; }
+
+.label { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.amount { margin: 4px 0 16px; font-size: 2.25rem; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.symbol { font-size: 1.25rem; font-weight: 500; color: var(--muted); }
+
+.details { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin: 0 0 20px; font-size: 0.9rem; }
+.details dt { color: var(--muted); }
+.details dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.pay { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--border); padding-top: 20px; }
+.countdown { margin: 0; color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.countdown.late { color: var(--error); }
+.account { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+button {
+  font: inherit;
+  font-weight: 600;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+}
+button:disabled { opacity: 0.55; cursor: default; }
+
+.notice { margin: 0; padding: 12px; border-radius: 10px; background: var(--info-bg); font-size: 0.9rem; }
+.notice.error { background: var(--error-bg); color: var(--error); }
+
+.status { border-top: 1px solid var(--border); padding-top: 20px; }
+.status p { margin: 0 0 8px; }
+.status-title { font-weight: 650; font-size: 1.1rem; }
+.status.success .status-title { color: var(--success); }
+.status.error .status-title { color: var(--error); }
+.status.muted .status-title { color: var(--muted); }
+.tx { color: var(--accent); font-size: 0.9rem; }

@@ -1,0 +1,16 @@
+# Secrets and local config: never commit these.
+.env
+.env.*
+!.env.example
+local.properties
+*.keystore
+*.jks
+*.password
+
+# Build output and dependencies
+node_modules/
+dist/
+build/
+.gradle/
+*.apk
+.DS_Store
